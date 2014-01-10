@@ -8,7 +8,7 @@ setup(name='MongoTest',
     packages=['mongo_test'],
     description = """A Python library to ease testing applications that rely on
     MongoDB as a datastore""",
-    long_description = open('README.txt').read(),
+    long_description = open('README.rst').read(),
     license = "LICENSE.txt",
     keywords = "python MongoDB fixture test ",
     install_requires=[
