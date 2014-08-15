@@ -1,0 +1,9 @@
+configuration:
+    collection: test_users
+    drop: true
+
+simple_user:
+    _id: !oid 1
+    username: idbentley
+    first_name: Ian
+    last_name: Bentley
