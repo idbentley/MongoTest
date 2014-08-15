@@ -6,7 +6,8 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-FIXTURES_HOME = 'test/fixtures/'
+FIXTURES_HOME = 'tests/fixtures/'
+
 
 def oid_con(seed):
     value = int(seed)
@@ -23,10 +24,25 @@ def setup_data(paths, db):
 
     for path in paths:
         fixtures = yaml.load(file(os.path.join(FIXTURES_HOME, path)))
-        if "configuration" in fixtures:
+        if 'configuration' in fixtures:
             conf = fixtures.pop('configuration')
             collection = conf['collection']
             if conf.get('drop', False):
                 db[collection].drop()
             for key in fixtures:
                 db[collection].insert(fixtures[key])
+
+
+def teardown_data(paths, db):
+    for path in paths:
+        fixtures = yaml.load(file(os.path.join(FIXTURES_HOME, path)))
+        if 'configuration' in fixtures:
+            conf = fixtures.pop('configuration')
+            collection = conf['collection']
+            if conf.get('drop', False):
+                #if we drop collection, then that's the end
+                db[collection].drop()
+            else:
+                # don't drop collection but remove inserted items
+                for key in fixtures:
+                    db[collection].delete(fixtures[key])
