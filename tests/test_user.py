@@ -17,7 +17,7 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         current_path = os.path.abspath(os.path.dirname(__name__))
-        self.fixture_path = os.path.join(current_path, 'fixtures/user_fixture.yml')
+        self.fixture_path = os.path.join(current_path, 'tests/fixtures/user_fixture.yml')
         setup_data([self.fixture_path], db)
 
     def test_find_user(self):
