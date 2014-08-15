@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='MongoTest',
-      version='0.1.0',
+      version='0.1.1',
       author="idbentley",
       author_email='ian.bentley@gmail.com',
       url="https://github.com/idbentley/mongo_test",
