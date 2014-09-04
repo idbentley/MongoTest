@@ -3,7 +3,6 @@ import commands
 import signal
 import os
 import logging
-import psutil
 
 _logger = logging.getLogger(__name__)
 

@@ -14,6 +14,5 @@ setup(name='MongoTest',
       install_requires=[
           "PyYaml",
           "pymongo",
-          'psutil'
       ]
 )
