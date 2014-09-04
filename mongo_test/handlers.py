@@ -1,6 +1,5 @@
 import subprocess
 import commands
-import re
 import signal
 import os
 import logging
@@ -10,9 +9,10 @@ _logger = logging.getLogger(__name__)
 TARGET_DIR='test/target'
 PORT='27018'
 
-def startup():
+def startup(mongo_path):
     _logger.info("about to start mongod")
-    p = subprocess.Popen([commands.getoutput('which mongod'),
+    path = mongo_path or commands.getoutput('which mongod')
+    p = subprocess.Popen([path,
         '--port', PORT,
         '--fork',
         '--dbpath', '{0}/db'.format(TARGET_DIR),
