@@ -22,8 +22,9 @@ class TestUser(unittest.TestCase):
 
     def test_find_user(self):
         # Fetch user by id
-        user = db.users.find_one(query={'_id': oid_con(1)})
+        user = db.test_users.find_one(query={'_id': oid_con(1)})
         # Check pymongo works as advertised.
+        assert user
         assert user['_id'] == oid_con(1)
         assert user['username'] == 'idbentley'
 

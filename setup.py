@@ -13,6 +13,7 @@ setup(name='MongoTest',
       keywords="python MongoDB fixture test ",
       install_requires=[
           "PyYaml",
-          "pymongo", 'psutil'
-      ],
+          "pymongo",
+          'psutil'
+      ]
 )
