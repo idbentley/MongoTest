@@ -4,7 +4,7 @@ setup(name='MongoTest',
       version='0.1.2',
       author="idbentley",
       author_email='ian.bentley@gmail.com',
-      url="https://github.com/idbentley/mongo_test",
+      url="https://github.com/idbentley/MongoTest",
       packages=['mongo_test'],
       description="""A Python library to ease testing applications that rely on
     MongoDB as a datastore""",
