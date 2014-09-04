@@ -6,7 +6,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-FIXTURES_HOME = 'tests/fixtures/'
+FIXTURES_HOME = 'test/fixtures/'
 
 
 def oid_con(seed):
@@ -40,7 +40,6 @@ def teardown_data(paths, db):
             conf = fixtures.pop('configuration')
             collection = conf['collection']
             if conf.get('drop', False):
-                #if we drop collection, then that's the end
                 db[collection].drop()
             else:
                 # don't drop collection but remove inserted items

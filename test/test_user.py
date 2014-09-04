@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import unittest
 import os
@@ -6,27 +5,30 @@ import os
 from pymongo import MongoClient
 from mongo_test.fixtures import setup_data, oid_con, teardown_data
 
-conn = MongoClient(port=27017)
-db = conn.myapp
 
-from mongo_test.handlers import startup_handle
-startup_handle()
+from mongo_test.handlers import startup, teardown, PORT
 
 
 class TestUser(unittest.TestCase):
 
+    fixture_paths = ['user_fixture.yml']
+
     def setUp(self):
-        current_path = os.path.abspath(os.path.dirname(__name__))
-        self.fixture_path = os.path.join(current_path, 'tests/fixtures/user_fixture.yml')
-        setup_data([self.fixture_path], db)
+        startup()
+
+        conn = MongoClient(port=int(PORT))
+        self.db = conn.myapp
+
+        setup_data(self.fixture_paths, self.db)
 
     def test_find_user(self):
         # Fetch user by id
-        user = db.test_users.find_one(query={'_id': oid_con(1)})
+        user = self.db.test_users.find_one(query={'_id': oid_con(1)})
         # Check pymongo works as advertised.
         assert user
         assert user['_id'] == oid_con(1)
         assert user['username'] == 'idbentley'
 
     def tearDown(self):
-        teardown_data([self.fixture_path], db)
+        teardown_data(self.fixture_paths, self.db)
+        teardown()

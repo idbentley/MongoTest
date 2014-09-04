@@ -10,16 +10,16 @@ _logger = logging.getLogger(__name__)
 TARGET_DIR = 'test/target'
 PORT = os.environ.get('MONGO_PORT') or "1234"
 
-
-def startup_handle():
-    _logger.info('about to start mongod')
-    p = subprocess.Popen([commands.getoutput('which mongod'),
-                          '--port', PORT,
-                          '--fork',
-                          '--dbpath', '{0}/db'.format(TARGET_DIR),
-                          '--logpath', '{0}/mongo.log'.format(TARGET_DIR),
-                          '--smallfiles',
-                          '--noprealloc'])
+def startup(mongo_path=""):
+    _logger.info("about to start mongod")
+    path = mongo_path or commands.getoutput('which mongod')
+    p = subprocess.Popen([path,
+        '--port', PORT,
+        '--fork',
+        '--dbpath', '{0}/db'.format(TARGET_DIR),
+        '--logpath', '{0}/mongo.log'.format(TARGET_DIR),
+        '--smallfiles',
+        '--noprealloc'])
     p.wait()
     _logger.info("mongod started successfully")
 
